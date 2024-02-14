@@ -1,0 +1,26 @@
+public class Main {
+    static final int sides = 6;
+
+    static void solve(int sum, int rollsLeft, double probability, double[] sumProbability) {
+        if (rollsLeft == 0) {
+            sumProbability[sum] += probability;
+            return;
+        }
+
+        for (int i = 1; i <= sides; ++i) {
+            solve(sum + i, rollsLeft - 1, probability / sides, sumProbability);
+        }
+    }
+
+    public static void main(String[] args) {
+        final int totalDice = 2;
+        double[] sumProbability = new double[2 * sides + 1];
+
+        solve(0, totalDice, 1.0, sumProbability);
+
+        System.out.println("Probability of each sum when rolling two dice:");
+        for (int sum = 2; sum <= 2 * sides; ++sum) {
+            System.out.println("P(Sum = " + sum + ") = " + sumProbability[sum]);
+        }
+    }
+}
