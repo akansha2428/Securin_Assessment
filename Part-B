@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+    public static void undoomDice(List<Integer> dieA, List<Double> newDieA, List<Double> newDieB) {
+        for (int i = 0; i < 6; ++i) {
+            newDieA.add(0.0);
+            newDieB.add(0.0);
+        }
+
+        for (int spot : dieA) {
+            if (spot <= 4) {
+                newDieA.set(spot - 1, newDieA.get(spot - 1) + 1.0);
+            }
+        }
+
+        newDieB.addAll(newDieA);
+    }
+
+    public static void main(String[] args) {
+        List<Integer> dieA = List.of(1, 2, 3, 4, 5, 6);
+        List<Double> newDieA = new ArrayList<>();
+        List<Double> newDieB = new ArrayList<>();
+
+        undoomDice(dieA, newDieA, newDieB);
+
+        System.out.print("New Die A: ");
+        for (double prob : newDieA) {
+            System.out.print(prob + " ");
+        }
+        System.out.println();
+
+        System.out.print("New Die B: ");
+        for (double prob : newDieB) {
+            System.out.print(prob + " ");
+        }
+        System.out.println();
+    }
+}
